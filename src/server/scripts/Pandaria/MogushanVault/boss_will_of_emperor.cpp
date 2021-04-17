@@ -916,7 +916,7 @@ class mob_woe_add_generic : public CreatureScript
                 {
                     me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, true);
                     me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_THREAT, true);
-                    me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_PULL, true);
+                    //me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_COMPLETE_AND_REWARD_WORLD_QUEST, true);
                 }
             }
 

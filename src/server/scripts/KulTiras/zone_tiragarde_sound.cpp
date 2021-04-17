@@ -185,7 +185,7 @@ struct npc_flynn_fairwind : public ScriptedAI
     {
         if (quest->GetQuestId() == QUEST_OUT_LIKE_FLYNN)
         {
-            if (Creature* flynn = player->SummonCreature(me->GetEntry(), me->GetPosition(), TEMPSUMMON_CORPSE_DESPAWN, 0, 0, true))
+            if (Creature* flynn = player->SummonCreature(me->GetEntry(), me->GetPosition(), TEMPSUMMON_CORPSE_DESPAWN, 0, 0, player->GetGUID()))
             {
                 flynn->AI()->SetGUID(player->GetGUID());
                 me->DestroyForPlayer(player);
@@ -199,7 +199,7 @@ struct npc_flynn_fairwind : public ScriptedAI
         me->RemoveNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
         me->SetAIAnimKitId(0);
 
-        if (Creature* ashvaneJailer = me->SummonCreature(NPC_ASHVANE_JAILER_EVENT, 144.839996f, -2702.790039f, 28.961100f, 0.799371f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000, true))
+        if (Creature* ashvaneJailer = me->SummonCreature(NPC_ASHVANE_JAILER_EVENT, 144.839996f, -2702.790039f, 28.961100f, 0.799371f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
             m_ashvaneJailerGUID = ashvaneJailer->GetGUID();
 
         me->GetScheduler().Schedule(1s, [this](TaskContext /*context*/)

@@ -1137,7 +1137,7 @@ public:
 
         void Register() override
         {
-            OnEffectHitTarget += SpellEffectFn(spell_chronomatic_anomaly_temporal_smash_SpellScript::HandleHitTarget, EFFECT_0, SPELL_EFFECT_DASH);
+            OnEffectHitTarget += SpellEffectFn(spell_chronomatic_anomaly_temporal_smash_SpellScript::HandleHitTarget, EFFECT_0, SPELL_EFFECT_JUMP_CHARGE);
         }
     };
 

@@ -107,7 +107,7 @@ public:
                 // if we use the motion master only to relocate the player
                 // it will cause bugs
                 if (who->GetOrientation() != SlipstreamPositions[SlipstreamPosition].GetOrientation())
-                    who->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TURNING);
+                    who->RemoveAurasWithInterruptFlags(SpellAuraInterruptFlags::Turning);
 
                 if (who->GetTypeId() == TYPEID_PLAYER)
                     me->GetMap()->PlayerRelocation(who->ToPlayer(), SlipstreamPositions[SlipstreamPosition].GetPositionX(), SlipstreamPositions[SlipstreamPosition].GetPositionY(), SlipstreamPositions[SlipstreamPosition].GetPositionZ(), SlipstreamPositions[SlipstreamPosition].GetOrientation());

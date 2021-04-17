@@ -110,9 +110,9 @@ struct npc_huldar : public ScriptedAI
         {
             case QUEST_PROTECT_SHIPMENT:
             {
-                me->SummonCreature(NPC_DARK_IRON_AMBUSHER, -5699.78f, -3565.10f, 308.514f, 1.67945f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000, true);
-                me->SummonCreature(NPC_DARK_IRON_AMBUSHER, -5694.87f, -3559.27f, 307.216f, 2.15854f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000, true);
-                me->SummonCreature(NPC_SAEAN, -5697.07f, -3562.87f, 307.883f, 1.93863f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000, true);
+                me->SummonCreature(NPC_DARK_IRON_AMBUSHER, -5699.78f, -3565.10f, 308.514f, 1.67945f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000);
+                me->SummonCreature(NPC_DARK_IRON_AMBUSHER, -5694.87f, -3559.27f, 307.216f, 2.15854f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000);
+                me->SummonCreature(NPC_SAEAN, -5697.07f, -3562.87f, 307.883f, 1.93863f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000);
 
                 player->CastSpell(player, SPELL_SHIPMENT_CREDIT, true);
             }

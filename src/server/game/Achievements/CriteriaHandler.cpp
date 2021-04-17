@@ -982,7 +982,7 @@ void CriteriaHandler::SetCriteriaProgress(Criteria const* criteria, uint64 chang
     progress->Date = time(nullptr); // set the date to the latest update.
     progress->PlayerGUID = referencePlayer ? referencePlayer->GetGUID() : ObjectGuid::Empty;
 
-    uint32 timeElapsed = 0;
+    Seconds timeElapsed = Seconds::zero();
 
     if (criteria->Entry->StartTimer)
     {
@@ -994,7 +994,7 @@ void CriteriaHandler::SetCriteriaProgress(Criteria const* criteria, uint64 chang
             if (timedIter != _timeCriteriaTrees.end())
             {
                 // Client expects this in packet
-                timeElapsed = criteria->Entry->StartTimer - (timedIter->second / IN_MILLISECONDS);
+                timeElapsed = Seconds(criteria->Entry->StartTimer - (timedIter->second / IN_MILLISECONDS));
 
                 // Remove the timer, we wont need it anymore
                 if (CheckCompletedCriteriaTree(tree, referencePlayer))
@@ -2115,6 +2115,15 @@ bool CriteriaHandler::ModifierSatisfied(ModifierTreeEntry const* modifier, uint6
             if (referencePlayer->GetQuestStatus(reqValue) != QUEST_STATUS_COMPLETE)
                 return false;
             break;
+        case CRITERIA_ADDITIONAL_CONDITION_COMPLETED_QUEST_OBJECTIVE: // 112
+        {
+            QuestObjective const* objective = sObjectMgr->GetQuestObjective(reqValue);
+            if (!objective)
+                return false;
+            if (referencePlayer->GetQuestRewardStatus(objective->QuestID) || !referencePlayer->IsQuestObjectiveComplete(*objective))
+                return false;
+            break;
+        }
         case CRITERIA_ADDITIONAL_CONDITION_EXPLORED_AREA: // 113
         {
             AreaTableEntry const* areaTable = sAreaTableStore.LookupEntry(reqValue);
@@ -2596,6 +2605,8 @@ bool CriteriaHandler::ModifierSatisfied(ModifierTreeEntry const* modifier, uint6
                 return false;
             break;
         }
+        case CRITERIA_ADDITIONAL_CONDITION_USED_LEVEL_BOOST_LESS_THAN_HOURS_AGO: // 188
+            return false;
         case CRITERIA_ADDITIONAL_CONDITION_HONOR_LEVEL: // 193
             if (referencePlayer->GetHonorLevel() != reqValue)
                 return false;

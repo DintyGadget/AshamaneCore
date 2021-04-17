@@ -197,7 +197,7 @@ public:
             if (player->GetQuestObjectiveCounter(TanaanQuestObjectives::ObjAriokGossip) < 1)
                 player->KilledMonsterCredit(TanaanKillCredits::CreditAriokGossip);
 
-            if (TempSummon* l_Ariok = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true))
+            if (TempSummon* l_Ariok = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0))
                 if (l_Ariok->GetAI())
                     l_Ariok->AI()->SetGUID(player->GetGUID());
         }

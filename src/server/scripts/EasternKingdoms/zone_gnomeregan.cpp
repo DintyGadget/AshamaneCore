@@ -103,7 +103,7 @@ public:
     {
         if (quest->GetQuestId() == QUEST_WITHDRAW_TO_THE_LOADING_ROOM)
         {
-            if (TempSummon* agent = player->SummonCreature(NPC_IMUN_AGENT, SpawnPosition, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
+            if (TempSummon* agent = player->SummonCreature(NPC_IMUN_AGENT, SpawnPosition, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, player->GetGUID()))
             {
                 agent->SetSpeed(MOVE_RUN, 1.0f);
                 agent->AddUnitFlag(UnitFlags(UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_NOT_SELECTABLE));

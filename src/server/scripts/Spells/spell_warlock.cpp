@@ -1153,7 +1153,7 @@ class spell_warlock_doomguard_doom_bolt : public SpellScriptLoader
             void HandleHit(SpellEffIndex /*effIndex*/)
             {
                 // "Deals 20% additional damage to targets below 20% health"
-                if (GetHitUnit()->HasAuraState(AURA_STATE_HEALTHLESS_20_PERCENT))
+                if (GetHitUnit()->HasAuraState(AURA_STATE_WOUNDED_20_PERCENT))
                 {
                     uint32 damage = GetHitDamage();
                     AddPct(damage, GetSpellInfo()->GetEffect(EFFECT_1)->BasePoints);
@@ -5946,12 +5946,12 @@ public:
                         {
                             int32 valToUse = 0;
 
-                            if (spell->Id == SPELL_CORRUPTION_DOT)
+                            /*if (spell->Id == SPELL_CORRUPTION_DOT)
                                 valToUse = (*iter)->GetRemainingDamage(GetSpellInfo()->GetEffect(EFFECT_2)->BasePoints * 1000);
                             else
                                 valToUse = (*iter)->GetRemainingDamage();
 
-                            damage += valToUse * GetSpellInfo()->GetEffect(EFFECT_1)->BasePoints / 100;
+                            damage += valToUse * GetSpellInfo()->GetEffect(EFFECT_1)->BasePoints / 100;*/ ///TODO: remove
                         }
                     }
                 }

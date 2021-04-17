@@ -577,7 +577,7 @@ class spell_great_bank_heist_vault_interact : public SpellScript
         if (!GetCaster()->IsPlayer())
             return;
 
-        if (Creature* vault = GetCaster()->SummonCreature(NPC_FBOK_VAULT, GetCaster()->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true))
+        if (Creature* vault = GetCaster()->SummonCreature(NPC_FBOK_VAULT, GetCaster()->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0))
             GetCaster()->CastSpell(vault, SPELL_CONTROL_VEHICLE, true);
     }
 

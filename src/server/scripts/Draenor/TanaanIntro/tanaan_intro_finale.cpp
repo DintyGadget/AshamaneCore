@@ -255,7 +255,7 @@ public:
             player->KilledMonsterCredit(TanaanKillCredits::CreditSpeakWithThaelin);
             CloseGossipMenuFor(player);
 
-            player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true);
+            player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, player->GetGUID());
             player->RemoveAurasDueToSpell(TanaanPhases::PhaseBlackrockThaelinLow);
         }
 
@@ -567,7 +567,7 @@ public:
     {
         if (quest->GetQuestId() == TanaanQuests::QuestATasteOfIron)
         {
-            // On enlève Thaelin avant le début de la cinématique, pour qu'il revienne correctement après coté client
+            // On enl?ve Thaelin avant le d?but de la cin?matique, pour qu'il revienne correctement apr?s cot? client
             player->RemoveAurasDueToSpell(TanaanPhases::PhaseFinalThaelinCanon);
 
             player->GetSceneMgr().PlaySceneByPackageId(TanaanSceneObjects::SceneShootingGallery, SCENEFLAG_NOT_CANCELABLE | SCENEFLAG_UNK16);

@@ -47,15 +47,6 @@ struct AchievementEntry
     int32 CovenantID;
 };
 
-struct AnimationDataEntry
-{
-    uint32 ID;
-    uint16 BehaviorID;
-    uint8 BehaviorTier;
-    int32 Fallback;
-    int32 Flags[2];
-};
-
 struct AdventureJournalEntry
 {
     uint32 ID;
@@ -79,7 +70,7 @@ struct AdventureJournalEntry
     uint16 CurrencyType;
     uint32 CurrencyQuantity;
     uint16 UiMapID;
-    int32 BonusPlayerConditionID[2];
+    uint32 BonusPlayerConditionID[2];
     uint8 BonusValue[2];
 };
 
@@ -88,7 +79,7 @@ struct AdventureMapPOIEntry
     uint32 ID;
     LocalizedString Title;
     LocalizedString Description;
-    float WorldPosition[2];
+    DBCPosition2D WorldPosition;
     int8 Type;
     uint32 PlayerConditionID;
     uint32 QuestID;
@@ -98,6 +89,15 @@ struct AdventureMapPOIEntry
     uint32 UiTextureKitID;
     int32 MapID;
     uint32 AreaTableID;
+};
+
+struct AnimationDataEntry
+{
+    uint32 ID;
+    uint16 BehaviorID;
+    uint8 BehaviorTier;
+    int32 Fallback;
+    int32 Flags[2];
 };
 
 struct AnimKitEntry
@@ -621,6 +621,14 @@ struct ChatChannelsEntry
     int32 Flags;
     int8 FactionGroup;
     int32 Ruleset;
+};
+
+struct ChrClassUIDisplayEntry
+{
+    uint32 ID;
+    uint8 ChrClassesID;
+    uint32 AdvGuidePlayerConditionID;
+    uint32 SplashPlayerConditionID;
 };
 
 struct ChrClassesEntry
@@ -3459,6 +3467,8 @@ struct SpellShapeshiftFormEntry
     uint16 MountTypeID;
     uint32 CreatureDisplayID[4];
     uint32 PresetSpellID[MAX_SHAPESHIFT_SPELLS];
+
+    EnumFlag<SpellShapeshiftFormFlags> GetFlags() const { return static_cast<SpellShapeshiftFormFlags>(Flags); }
 };
 
 struct SpellTargetRestrictionsEntry

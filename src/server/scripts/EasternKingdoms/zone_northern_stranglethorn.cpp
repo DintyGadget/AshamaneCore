@@ -62,7 +62,7 @@ public:
         switch (quest->GetQuestId())
         {
             case QUEST_A_PHYSICAL_SPECIMEN:
-                player->SummonCreature(NPC_BLOODLORD_MANDOKIR, -11306.80f, -194.917f, 75.3878f, 2.92012f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000, true);
+                player->SummonCreature(NPC_BLOODLORD_MANDOKIR, -11306.80f, -194.917f, 75.3878f, 2.92012f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 90000, player->GetGUID());
                 break;
             default:
                 break;

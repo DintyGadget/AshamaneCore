@@ -830,7 +830,7 @@ public:
             {
                 if (Creature* l_Nhalish = m_Instance->instance->GetCreature(m_Instance->GetGuidData(eShadowmoonBurialGroundsDatas::DataBossNhallish)))
                 {
-                    if (Creature* Soul = GetCaster()->SummonCreature(eNhalishCreatures::CreatureSoul, GetHitUnit()->GetPosition(), TempSummonType::TEMPSUMMON_TIMED_DESPAWN, 20 * TimeConstants::IN_MILLISECONDS, 0, true))
+                    if (Creature* Soul = GetCaster()->SummonCreature(eNhalishCreatures::CreatureSoul, GetHitUnit()->GetPosition(), TempSummonType::TEMPSUMMON_TIMED_DESPAWN, 20 * TimeConstants::IN_MILLISECONDS, 0))
                     {
                         if (boss_nhalish::boss_nhalishAI* linkAI = CAST_AI(boss_nhalish::boss_nhalishAI, l_Nhalish->GetAI()))
                         {

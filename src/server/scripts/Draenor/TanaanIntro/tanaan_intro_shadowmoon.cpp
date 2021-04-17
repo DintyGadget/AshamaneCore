@@ -37,7 +37,7 @@ public:
         {
             player->TeleportTo(MAP_TANAAN_JUNGLE_INTRO, 4537.817f, -2291.243f, 32.451f, 0.728175f);
 
-            // Ces phases seront ajoutées après la fin de la scene
+            // Ces phases seront ajout?es apr?s la fin de la scene
             player->RemoveAurasDueToSpell(TanaanPhases::PhaseBlackrockSlaves);
             player->RemoveAurasDueToSpell(TanaanPhases::PhaseBlackrockMainNpcs);
 
@@ -227,7 +227,7 @@ public:
     bool OnQuestAccept(Player* player, Creature* creature, const Quest* quest) override
     {
         if (quest->GetQuestId() == TanaanQuests::QuestYrelTanaan || quest->GetQuestId() == TanaanQuests::QuestYrelHorde)
-            player->SummonCreature(TanaanCreatures::NpcYrelSummon, creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true);
+            player->SummonCreature(TanaanCreatures::NpcYrelSummon, creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0);
 
         return false;
     }

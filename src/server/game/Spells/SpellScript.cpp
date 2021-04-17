@@ -243,16 +243,6 @@ SpellScript::OnCalcCastTimeHandler::OnCalcCastTimeHandler(SpellOnCalcCastTimeFnT
     _onCalcCastTimeHandlerScript = OnCalcCastTimeHandlerScript;
 }
 
-void SpellScript::OnCalcCritChanceHandler::Call(SpellScript* spellScript, Unit* victim, float& chance)
-{
-    (spellScript->*_onCalcCritChanceHandlerScript)(victim, chance);
-}
-
-SpellScript::OnCalcCritChanceHandler::OnCalcCritChanceHandler(SpellOnCalcCritChanceFnType OnCalcCritChanceHandlerScript)
-{
-    _onCalcCritChanceHandlerScript = OnCalcCritChanceHandlerScript;
-}
-
 SpellScript::EffectHandler::EffectHandler(SpellEffectFnType _pEffectHandlerScript, uint8 _effIndex, uint16 _effName)
     : _SpellScript::EffectNameCheck(_effName), _SpellScript::EffectHook(_effIndex)
 {
@@ -292,6 +282,16 @@ SpellScript::HitHandler::HitHandler(SpellHitFnType _pHitHandlerScript)
 void SpellScript::HitHandler::Call(SpellScript* spellScript)
 {
     (spellScript->*pHitHandlerScript)();
+}
+
+SpellScript::OnCalcCritChanceHandler::OnCalcCritChanceHandler(SpellOnCalcCritChanceFnType onCalcCritChanceHandlerScript)
+{
+    _onCalcCritChanceHandlerScript = onCalcCritChanceHandlerScript;
+}
+
+void SpellScript::OnCalcCritChanceHandler::Call(SpellScript* spellScript, Unit* victim, float& critChance) const
+{
+    (spellScript->*_onCalcCritChanceHandlerScript)(victim, critChance);
 }
 
 SpellScript::TargetHook::TargetHook(uint8 _effectIndex, uint16 _targetType, bool _area, bool _dest)
@@ -981,15 +981,15 @@ void AuraScript::EffectCalcSpellModHandler::Call(AuraScript* auraScript, AuraEff
     (auraScript->*pEffectHandlerScript)(aurEff, spellMod);
 }
 
-AuraScript::EffectCalcCritChanceHandler::EffectCalcCritChanceHandler(AuraEffectCalcCritChanceFnType _pEffectHandlerScript, uint8 _effIndex, uint16 _effName)
-    : AuraScript::EffectBase(_effIndex, _effName)
+AuraScript::EffectCalcCritChanceHandler::EffectCalcCritChanceHandler(AuraEffectCalcCritChanceFnType effectHandlerScript, uint8 effIndex, uint16 effName)
+    : AuraScript::EffectBase(effIndex, effName)
 {
-    pEffectHandlerScript = _pEffectHandlerScript;
+    _effectHandlerScript = effectHandlerScript;
 }
 
-void AuraScript::EffectCalcCritChanceHandler::Call(AuraScript* auraScript, AuraEffect const* aurEff, Unit* victim, float& chance)
+void AuraScript::EffectCalcCritChanceHandler::Call(AuraScript* auraScript, AuraEffect const* aurEff, Unit* victim, float& critChance) const
 {
-    (auraScript->*pEffectHandlerScript)(aurEff, victim, chance);
+    (auraScript->*_effectHandlerScript)(aurEff, victim, critChance);
 }
 
 AuraScript::EffectApplyHandler::EffectApplyHandler(AuraEffectApplicationModeFnType _pEffectHandlerScript, uint8 _effIndex, uint16 _effName, AuraEffectHandleModes _mode)
@@ -1078,6 +1078,16 @@ AuraScript::EffectProcHandler::EffectProcHandler(AuraEffectProcFnType effectHand
 void AuraScript::EffectProcHandler::Call(AuraScript* auraScript, AuraEffect* aurEff, ProcEventInfo& eventInfo)
 {
     (auraScript->*_EffectHandlerScript)(aurEff, eventInfo);
+}
+
+AuraScript::EnterLeaveCombatHandler::EnterLeaveCombatHandler(AuraEnterLeaveCombatFnType handlerScript)
+{
+    _handlerScript = handlerScript;
+}
+
+void AuraScript::EnterLeaveCombatHandler::Call(AuraScript* auraScript, bool isNowInCombat) const
+{
+    (auraScript->*_handlerScript)(isNowInCombat);
 }
 
 bool AuraScript::_Load(Aura* aura)
@@ -1343,6 +1353,7 @@ Unit* AuraScript::GetTarget() const
         case AURA_SCRIPT_HOOK_AFTER_PROC:
         case AURA_SCRIPT_HOOK_EFFECT_PROC:
         case AURA_SCRIPT_HOOK_EFFECT_AFTER_PROC:
+        case AURA_SCRIPT_HOOK_ENTER_LEAVE_COMBAT:
             return m_auraApplication->GetTarget();
         default:
             TC_LOG_ERROR("scripts", "Script: `%s` Spell: `%u` AuraScript::GetTarget called in a hook in which the call won't have effect!", m_scriptName->c_str(), m_scriptSpellId);

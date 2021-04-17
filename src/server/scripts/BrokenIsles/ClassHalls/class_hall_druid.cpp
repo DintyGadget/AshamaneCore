@@ -1029,7 +1029,7 @@ private:
                 killer->ToPlayer()->KilledMonsterCredit(me->GetEntry());
                 PhasingHandler::AddPhase(killer, 5954, true);
                 PhasingHandler::RemovePhase(killer, 5953, true);
-                killer->ToPlayer()->SummonCreature(NPC_KEEPER_REMULOS_103488, Position(1720.639f, 1347.214f, 2.08268f, 4.830286f), TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true);
+                killer->ToPlayer()->SummonCreature(NPC_KEEPER_REMULOS_103488, Position(1720.639f, 1347.214f, 2.08268f, 4.830286f), TEMPSUMMON_TIMED_DESPAWN, 60000, 0);
 
                 //PhasingHandler::RemovePhase(killer, 6122, true);
             }

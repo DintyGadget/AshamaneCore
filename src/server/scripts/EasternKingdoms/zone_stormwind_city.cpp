@@ -52,7 +52,7 @@ public:
             return;
 
         if (Creature* jaina = me->FindNearestCreature(NPC_TIDES_OF_WAR_JAINA, 20.f))
-            if (player->SummonCreature(NPC_TIDES_OF_WAR_JAINA, *jaina, TEMPSUMMON_TIMED_DESPAWN, 300000, 0, true))
+            if (player->SummonCreature(NPC_TIDES_OF_WAR_JAINA, *jaina, TEMPSUMMON_TIMED_DESPAWN, 300000, 0, player->GetGUID()))
                 jaina->DestroyForPlayer(player);
 
         player->CastSpell(player, SPELL_KILL_CREDIT_REPORT_ANDUIN, true);
@@ -65,7 +65,7 @@ public:
         })
         .Schedule(50s, [](TaskContext context)
         {
-            GetContextPlayer()->SummonCreature(NPC_VISION_OF_SAILOR_MEMORY, -8373.799805f, 245.410004f, 156.882996f, 0.f, TEMPSUMMON_TIMED_DESPAWN, 300000, true);
+            GetContextPlayer()->SummonCreature(NPC_VISION_OF_SAILOR_MEMORY, -8373.799805f, 245.410004f, 156.882996f, 0.f, TEMPSUMMON_TIMED_DESPAWN, 300000);
         });
 
         player->RemoveMovieDelayedAction(858);

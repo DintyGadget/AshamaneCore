@@ -192,10 +192,10 @@ bool Garrison::LoadFromDB()
             mission.PacketInfo.DbID             = dbId;
             mission.PacketInfo.MissionRecID     = missionId;
             mission.PacketInfo.OfferTime        = time_t(fields[2].GetUInt32());
-            mission.PacketInfo.OfferDuration    = missionEntry->OfferDuration;
+            mission.PacketInfo.OfferDuration    = Seconds(missionEntry->OfferDuration);
             mission.PacketInfo.StartTime        = time_t(fields[3].GetUInt32());
-            mission.PacketInfo.TravelDuration   = missionEntry->TravelDuration;
-            mission.PacketInfo.MissionDuration  = missionEntry->MissionDuration;
+            mission.PacketInfo.TravelDuration   = Seconds(missionEntry->TravelDuration);
+            mission.PacketInfo.MissionDuration  = Seconds(missionEntry->MissionDuration);
             mission.PacketInfo.MissionState     = fields[4].GetUInt8();
 
             if (mission.PacketInfo.StartTime == 0)
@@ -477,7 +477,7 @@ void Garrison::AddMission(uint32 garrMissionId)
     mission.PacketInfo.DbID = dbId;
     mission.PacketInfo.MissionRecID = garrMissionId;
     mission.PacketInfo.OfferTime = time(nullptr);
-    mission.PacketInfo.OfferDuration = missionEntry->OfferDuration;
+    mission.PacketInfo.OfferDuration = Seconds(missionEntry->OfferDuration);
     mission.PacketInfo.MissionState = GarrisonMission::State::Offered;
     mission.PacketInfo.SuccessChance = 1;
     mission.PacketInfo.Flags = 0;
@@ -650,8 +650,8 @@ void Garrison::StartMission(uint32 garrMissionId, std::vector<uint64 /*DbID*/> F
     if (missionEntry->MissionCost && !_owner->HasCurrency(missionEntry->MissionCostCurrencyTypesId, missionEntry->MissionCost))
         return SendStartMissionResult(false); // GARRISON_ERROR_NOT_ENOUGH_CURRENCY
 
-    mission->PacketInfo.TravelDuration = missionEntry->TravelDuration;
-    mission->PacketInfo.MissionDuration = missionEntry->MissionDuration;
+    mission->PacketInfo.TravelDuration = Seconds(missionEntry->TravelDuration);
+    mission->PacketInfo.MissionDuration = Seconds(missionEntry->MissionDuration);
     mission->PacketInfo.StartTime = time(nullptr);
     mission->PacketInfo.MissionState = GarrisonMission::State::InProgress;
     mission->PacketInfo.SuccessChance = sGarrisonMgr.GetMissionSuccessChance(this, mission->PacketInfo.MissionRecID);
@@ -704,7 +704,7 @@ void Garrison::CompleteMission(uint32 garrMissionId)
     if (!mission)
         return;
 
-    bool canComplete = mission->PacketInfo.StartTime + mission->PacketInfo.MissionDuration < time(nullptr);
+    /*bool canComplete = mission->PacketInfo.StartTime + mission->PacketInfo.MissionDuration < time(nullptr);
     bool success = false;
 
     if (canComplete)
@@ -720,7 +720,7 @@ void Garrison::CompleteMission(uint32 garrMissionId)
     garrisonCompleteMissionResult.Result = canComplete ? GarrisonMission::Result::Success : GarrisonMission::Result::Fail;
     garrisonCompleteMissionResult.Mission = mission->PacketInfo;
     garrisonCompleteMissionResult.Succeed = success;
-    _owner->SendDirectMessage(garrisonCompleteMissionResult.Write());
+    _owner->SendDirectMessage(garrisonCompleteMissionResult.Write());*/
 }
 
 void Garrison::CalculateMissonBonusRoll(uint32 garrMissionId)

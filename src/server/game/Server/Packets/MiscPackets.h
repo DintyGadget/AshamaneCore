@@ -240,7 +240,7 @@ namespace WorldPackets
 
             WorldPacket const* Write() override;
 
-            uint32 Time = 0; ///< UnixTime
+            Timestamp<> Time;
         };
 
         class TutorialFlags : public ServerPacket
@@ -967,7 +967,7 @@ namespace WorldPackets
             ObjectGuid SourceGuid;
         };
 
-        class AdventureJournalOpenQuest final : public ClientPacket
+        /*class AdventureJournalOpenQuest final : public ClientPacket
         {
         public:
             AdventureJournalOpenQuest(WorldPacket&& packet) : ClientPacket(CMSG_ADVENTURE_JOURNAL_OPEN_QUEST, std::move(packet)) { }
@@ -980,12 +980,12 @@ namespace WorldPackets
         class AdventureJournalStartQuest final : public ClientPacket
         {
         public:
-            AdventureJournalStartQuest(WorldPacket&& packet) : ClientPacket(CMSG_ADVENTURE_JOURNAL_START_QUEST, std::move(packet)) { }
+            AdventureJournalStartQuest(WorldPacket&& packet) : ClientPacket(CMSG_ADVENTURE_JOURNAL_UPDATE_SUGGESTIONS, std::move(packet)) { }
 
             void Read() override;
 
             uint32 QuestID;
-        };
+        };*/
 
         class FactionSelectUI final : public ServerPacket
         {
@@ -1019,8 +1019,8 @@ namespace WorldPackets
             WorldPacket const* Write() override;
 
             int32 Type = 0;
-            int32 TimeLeft = 0;
-            int32 TotalTime = 0;
+            Duration<Seconds> TimeLeft;
+            Duration<Seconds> TotalTime;
         };
 
         class StartElapsedTimer final : public ServerPacket

@@ -568,7 +568,7 @@ void WorldSession::HandleAreaTriggerOpcode(WorldPackets::AreaTrigger::AreaTrigge
 void WorldSession::HandleUpdateAccountData(WorldPackets::ClientConfig::UserClientUpdateAccountData& packet)
 {
     TC_LOG_DEBUG("network", "WORLD: Received CMSG_UPDATE_ACCOUNT_DATA: type %u, time %u, decompressedSize %u",
-        packet.DataType, packet.Time, packet.Size);
+        packet.DataType, packet.Time.AsUnderlyingType(), packet.Size);
 
     if (packet.DataType > NUM_ACCOUNT_DATA_TYPES)
         return;
@@ -991,7 +991,7 @@ void WorldSession::HandleGuildSetFocusedAchievement(WorldPackets::Achievement::G
 void WorldSession::HandleServerTimeOffsetRequest(WorldPackets::Misc::ServerTimeOffsetRequest& /*request*/)
 {
     WorldPackets::Misc::ServerTimeOffset response;
-    response.Time = time(nullptr);
+    response.Time = GameTime::GetGameTimeSystemPoint();
     SendPacket(response.Write());
 }
 
@@ -1143,26 +1143,6 @@ void WorldSession::HandleCloseInteraction(WorldPackets::Misc::CloseInteraction& 
 {
     if (_player->PlayerTalkClass->GetInteractionData().SourceGuid == closeInteraction.SourceGuid)
         _player->PlayerTalkClass->GetInteractionData().Reset();
-}
-
-void WorldSession::HandleAdventureJournalOpenQuest(WorldPackets::Misc::AdventureJournalOpenQuest& packet)
-{
-    if (AdventureJournalEntry const* entry = sAdventureJournalStore.LookupEntry(packet.AdventureJournalID))
-        if (Quest const* quest = sObjectMgr->GetQuestTemplate(entry->QuestID))
-            if (!_player->hasQuest(entry->QuestID))
-                if (_player->CanTakeQuest(quest, true))
-                    if (WorldSession* session = _player->GetSession())
-                    {
-                        PlayerMenu menu(session);
-                        menu.SendQuestGiverQuestDetails(quest, _player->GetGUID(), true, false);
-                    }
-}
-
-void WorldSession::HandleAdventureJournalStartQuest(WorldPackets::Misc::AdventureJournalStartQuest& packet)
-{
-    if (Quest const* quest = sObjectMgr->GetQuestTemplate(packet.QuestID))
-        if (!_player->hasQuest(packet.QuestID))
-            _player->AddQuestAndCheckCompletion(quest, nullptr);
 }
 
 void WorldSession::HandleSelectFactionOpcode(WorldPackets::Misc::FactionSelect& selectFaction)

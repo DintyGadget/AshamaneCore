@@ -1362,7 +1362,7 @@ public:
                         break;
                     }
 
-                    if (TempSummon* soulwrath = me->SummonCreature(105000, me->GetPosition(), TEMPSUMMON_DEAD_DESPAWN, 20000, 0, true))
+                    if (TempSummon* soulwrath = me->SummonCreature(105000, me->GetPosition(), TEMPSUMMON_DEAD_DESPAWN, 20000, 0))
                     {
                         float x, y, z;
                         soulwrath->GetClosePoint(x, y, z, soulwrath->GetCombatReach() / 3, 25.0f);

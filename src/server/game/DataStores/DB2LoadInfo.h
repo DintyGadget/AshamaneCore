@@ -66,22 +66,22 @@ struct AdventureJournalLoadInfo
             { false, FT_STRING, "RewardDescription" },
             { false, FT_STRING, "ContinueDescription" },
             { false, FT_BYTE, "Type" },
-            { false, FT_INT, "PlayerConditionId" },
+            { false, FT_INT, "PlayerConditionID" },
             { false, FT_BYTE, "Flags" },
             { false, FT_BYTE, "ButtonActionType" },
-            { true, FT_INT, "TextureFileDataId" },
-            { false, FT_SHORT, "LfgDungeonId" },
-            { true, FT_INT, "QuestId" },
-            { false, FT_SHORT, "BattleMasterListId" },
+            { true, FT_INT, "TextureFileDataID" },
+            { false, FT_SHORT, "LfgDungeonID" },
+            { true, FT_INT, "QuestID" },
+            { false, FT_SHORT, "BattleMasterListID" },
             { false, FT_BYTE, "PriorityMin" },
             { false, FT_BYTE, "PriorityMax" },
-            { true, FT_INT, "ItemId" },
+            { true, FT_INT, "ItemID" },
             { false, FT_INT, "ItemQuantity" },
             { false, FT_SHORT, "CurrencyType" },
             { false, FT_INT, "CurrencyQuantity" },
-            { false, FT_SHORT, "UiMapId" },
-            { false, FT_INT, "BonusPlayerConditionId1" },
-            { false, FT_INT, "BonusPlayerConditionId2" },
+            { false, FT_SHORT, "UiMapID" },
+            { false, FT_INT, "BonusPlayerConditionID1" },
+            { false, FT_INT, "BonusPlayerConditionID2" },
             { false, FT_BYTE, "BonusValue1" },
             { false, FT_BYTE, "BonusValue2" },
         };
@@ -90,7 +90,7 @@ struct AdventureJournalLoadInfo
     }
 };
 
-struct AdventureMapPOILoadInfo
+struct AdventureMapPoiLoadInfo
 {
     static DB2LoadInfo const* Instance()
     {
@@ -99,8 +99,8 @@ struct AdventureMapPOILoadInfo
             { false, FT_INT, "ID" },
             { false, FT_STRING, "Title" },
             { false, FT_STRING, "Description" },
-            { false, FT_FLOAT, "WorldPosition1" },
-            { false, FT_FLOAT, "WorldPosition2" },
+            { false, FT_FLOAT, "WorldPositionX" },
+            { false, FT_FLOAT, "WorldPositionY" },
             { true, FT_BYTE, "Type" },
             { false, FT_INT, "PlayerConditionID" },
             { false, FT_INT, "QuestID" },
@@ -1049,6 +1049,22 @@ struct ChatChannelsLoadInfo
             { true, FT_INT, "Ruleset" },
         };
         static DB2LoadInfo const loadInfo(&fields[0], std::extent<decltype(fields)>::value, ChatChannelsMeta::Instance(), HOTFIX_SEL_CHAT_CHANNELS);
+        return &loadInfo;
+    }
+};
+
+struct ChrClassUiDisplayLoadInfo
+{
+    static DB2LoadInfo const* Instance()
+    {
+        static DB2FieldMeta const fields[] =
+        {
+            { false, FT_INT, "ID" },
+            { false, FT_BYTE, "ChrClassesID" },
+            { false, FT_INT, "AdvGuidePlayerConditionID" },
+            { false, FT_INT, "SplashPlayerConditionID" },
+        };
+        static DB2LoadInfo const loadInfo(&fields[0], std::extent<decltype(fields)>::value, ChrClassUIDisplayMeta::Instance(), HOTFIX_SEL_CHR_CLASS_UI_DISPLAY);
         return &loadInfo;
     }
 };

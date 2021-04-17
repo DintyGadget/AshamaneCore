@@ -188,7 +188,7 @@ public:
         if (player->GetQuestStatus(QUEST_UNBRIDLED_POWER_ALTRUIS) == QUEST_STATUS_INCOMPLETE) {
             player->CastSpell(go, SPELL_ACTIVATING_CONTROL_CONSOLE, false);
             if (Creature* creature = go->FindNearestCreature(NPC_ALTRUIS, 25.0f, true)) {
-                if (TempSummon* waypointAltruis = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true))
+                if (TempSummon* waypointAltruis = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, player->GetGUID()))
                 {
                     waypointAltruis->RemoveNpcFlag(UNIT_NPC_FLAG_GOSSIP);
                     waypointAltruis->RemoveNpcFlag(UNIT_NPC_FLAG_VENDOR);
@@ -203,7 +203,7 @@ public:
         if (player->GetQuestStatus(QUEST_UNBRIDLED_POWER_KAYN) == QUEST_STATUS_INCOMPLETE) {
             player->CastSpell(go, SPELL_ACTIVATING_CONTROL_CONSOLE, false);
             if (Creature* creature = go->FindNearestCreature(NPC_KAYN, 25.0f, true)) {
-                if (TempSummon* waypointKayn = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true))
+                if (TempSummon* waypointKayn = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, player->GetGUID()))
                 {
                     waypointKayn->RemoveNpcFlag(UNIT_NPC_FLAG_GOSSIP);
                     waypointKayn->RemoveNpcFlag(UNIT_NPC_FLAG_VENDOR);
@@ -377,7 +377,7 @@ public:
     {
         if (player->GetQuestStatus(QUEST_SPOILS_OF_VICTORY) == QUEST_STATUS_INCOMPLETE)
         {
-            if (TempSummon* waypointGaardoun = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, true))
+            if (TempSummon* waypointGaardoun = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN, 0, 0, player->GetGUID()))
             {
                 waypointGaardoun->RemoveNpcFlag(UNIT_NPC_FLAG_GOSSIP);
                 waypointGaardoun->RemoveNpcFlag(UNIT_NPC_FLAG_VENDOR);

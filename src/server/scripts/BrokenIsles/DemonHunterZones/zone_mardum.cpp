@@ -322,7 +322,7 @@ public:
             // TODO : Remove this line when phasing is done properly
             creature->DestroyForPlayer(player);
 
-            if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, creature->GetPosition(), TEMPSUMMON_TIMED_DESPAWN, 4000, 0, true))
+            if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, creature->GetPosition(), TEMPSUMMON_TIMED_DESPAWN, 4000, 0, player->GetGUID()))
             {
                 float x, y, z;
                 personalCreature->GetClosePoint(x, y, z, personalCreature->GetCombatReach() / 3, 50.0f);
@@ -493,7 +493,7 @@ public:
         // TODO : Remove this line when phasing is done properly
         creature->DestroyForPlayer(player);
 
-        if (TempSummon* personalCreature = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_TIMED_DESPAWN, 4000, 0, true))
+        if (TempSummon* personalCreature = player->SummonCreature(creature->GetEntry(), creature->GetPosition(), TEMPSUMMON_TIMED_DESPAWN, 4000, 0, player->GetGUID()))
             personalCreature->KillSelf();
         return true;
     }
@@ -880,7 +880,7 @@ public:
 
         if (Creature* devastator = player->FindNearestCreature(devastatorEntry, 50.0f))
         {
-            if (Creature* personnalCreature = player->SummonCreature(devastatorEntry, devastator->GetPosition(), TEMPSUMMON_CORPSE_DESPAWN, 5000, 0, true))
+            if (Creature* personnalCreature = player->SummonCreature(devastatorEntry, devastator->GetPosition(), TEMPSUMMON_CORPSE_DESPAWN, 5000, 0, player->GetGUID()))
             {
                 player->KilledMonsterCredit(devastatorEntry);
                 player->KilledMonsterCredit(killCreditEntry);

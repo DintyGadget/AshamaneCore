@@ -744,20 +744,10 @@ void WorldPackets::Misc::FactionSelect::Read()
     _worldPacket >> FactionChoice;
 }
 
-void WorldPackets::Misc::AdventureJournalOpenQuest::Read()
-{
-    _worldPacket >> AdventureJournalID;
-}
-
-void WorldPackets::Misc::AdventureJournalStartQuest::Read()
-{
-    _worldPacket >> QuestID;
-}
-
 WorldPacket const* WorldPackets::Misc::StartTimer::Write()
 {
-    _worldPacket << int32(TimeLeft);
-    _worldPacket << int32(TotalTime);
+    _worldPacket << TimeLeft;
+    _worldPacket << TotalTime;
     _worldPacket << int32(Type);
 
     return &_worldPacket;

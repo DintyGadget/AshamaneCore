@@ -355,7 +355,7 @@ class boss_garajal : public CreatureScript
                                 uint8  mobCount   = IsHeroic() ? 3: 1;
 
                                 for (uint8 i = 0; i < mobCount; ++i)
-                                    if (Creature* soulCutter = me->SummonCreature(NPC_SOUL_CUTTER, target->GetPositionX() + 2.0f, target->GetPositionY() + 2.0f, target->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN, 30000, i == 0))
+                                    if (Creature* soulCutter = me->SummonCreature(NPC_SOUL_CUTTER, target->GetPositionX() + 2.0f, target->GetPositionY() + 2.0f, target->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN, 30000))
                                     {
                                         soulCutter->GetPhaseShift().AddPhase(170, PhaseFlags::None, nullptr);
                                         soulCutter->AI()->AttackStart(target);

@@ -73,7 +73,7 @@ struct npc_trall_91731 : public ScriptedAI
 
         if (!player)
             return;
-        if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
+        if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, player->GetGUID()))
         {
             personalCreature->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, personalCreature->GetFollowAngle());
         }

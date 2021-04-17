@@ -124,7 +124,7 @@ struct npc_rastakhan_zuldazar_arrival : public ScriptedAI
     void QuestAccept(Player* player, Quest const* quest) override
     {
         if (quest->GetQuestId() == QUEST_SPEAKER_OF_THE_HORDE)
-            player->SummonCreature(NPC_ZOLANI, -1100.689941f, 817.934021f, 497.243011f, 6.062160f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 120000, true);
+            player->SummonCreature(NPC_ZOLANI, -1100.689941f, 817.934021f, 497.243011f, 6.062160f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 120000, player->GetGUID());
     }
 };
 

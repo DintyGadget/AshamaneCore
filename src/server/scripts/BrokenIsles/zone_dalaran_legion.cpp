@@ -1293,7 +1293,7 @@ public:
         //   _positon= player->GetPosition();
 
 
-        if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
+        if (TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, player->GetGUID()))
         {
             //personalCreature->GetMotionMaster()->MoveCloserAndStop(personalCreature->GetEntry(), player, 5.0f);
             personalCreature->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, personalCreature->GetFollowAngle());
@@ -1310,7 +1310,7 @@ public:
         }
 
         _positon = npcPos;
-        TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 3600000, 0, true);
+        TempSummon* personalCreature = player->SummonCreature(_insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 3600000, 0, player->GetGUID());
     }
     enum BROKEN_ISLES_PATHFINDE
     {
@@ -1561,7 +1561,7 @@ struct npc_emissary_auldbridge_111109 : public ScriptedAI
         Position _positon = me->GetPosition();
         GetPositionWithDistInFront(me, 15.f, _positon);
 
-        if (TempSummon* personalCreature = player->SummonCreature(insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
+        if (TempSummon* personalCreature = player->SummonCreature(insideNpc, _positon, TEMPSUMMON_TIMED_DESPAWN, 60000, 0, player->GetGUID()))
         {
             personalCreature->GetMotionMaster()->MoveFollow(player, PET_FOLLOW_DIST, personalCreature->GetFollowAngle());
         }
