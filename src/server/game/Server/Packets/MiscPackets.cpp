@@ -670,6 +670,10 @@ WorldPacket const* WorldPackets::Misc::ResearchComplete::Write()
 WorldPacket const* WorldPackets::Misc::SpecialMountAnim::Write()
 {
     _worldPacket << UnitGUID;
+    _worldPacket << uint32(SpellVisualKitIDs.size());
+    if (!SpellVisualKitIDs.empty())
+        _worldPacket.append(SpellVisualKitIDs.data(), SpellVisualKitIDs.size());
+
     return &_worldPacket;
 }
 
@@ -768,3 +772,11 @@ WorldPacket const* WorldPackets::Misc::OpenAlliedRaceDetailsGiver::Write()
 
     return &_worldPacket;
 }
+
+void WorldPackets::Misc::MountSpecial::Read()
+{
+    SpellVisualKitIDs.resize(_worldPacket.read<uint32>());
+    for (int32& spellVisualKitId : SpellVisualKitIDs)
+        _worldPacket >> spellVisualKitId;
+}
+
